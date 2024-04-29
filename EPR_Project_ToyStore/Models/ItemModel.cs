@@ -7,10 +7,9 @@ namespace EPR_Project_ToyStore.Models
     public class ItemModel
     {
         [Key]
-        public int ItemId { get; set; }
-        public string? ItemImg { get; set; }
+        public int? ItemId { get; set; }
         public string? ItemName { get; set; }
-        public double? ItemPrice { get; set; } // Change data type to double?
+        public decimal? ItemPrice { get; set; }
         public string? ItemDescription { get; set; }
         public int? ItemAgelimit { get; set; }
     }

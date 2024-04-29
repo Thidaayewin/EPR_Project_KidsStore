@@ -17,10 +17,6 @@ namespace EPR_Project_ToyStore.Properties
             TrustServerCertificate = true
         };
 
-        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        //{
-        //}
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -30,7 +26,15 @@ namespace EPR_Project_ToyStore.Properties
         }
 
 
-
         public DbSet<ItemModel> Items { get; set; }
-            }
+        public DbSet<OrderModel> Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderModel>()
+                .HasOne(o => o.Item)
+                .WithMany() // Assuming one-to-many relationship
+                .HasForeignKey(o => o.ItemId);
+        }
+    }
 }
