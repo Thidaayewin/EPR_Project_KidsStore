@@ -28,6 +28,11 @@ namespace EPR_Project_ToyStore.Properties
 
         public DbSet<ItemModel> Items { get; set; }
         public DbSet<OrderModel> Orders { get; set; }
+        public DbSet<CartModel> Cart { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
+        public DbSet<OrderItemModel> orderItems { get; set; }
+        public DbSet<CheckoutModel> checkout { get; set; }
+        public DbSet<CartItemModel> cartItem { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
