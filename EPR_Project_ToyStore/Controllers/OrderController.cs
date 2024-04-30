@@ -49,12 +49,12 @@ namespace EPR_Project_ToyStore.Controllers
             }
 
             decimal itemPrice = (decimal)item.ItemPrice;
+
             decimal amount = (decimal)(orderModel.OrderQuantity * itemPrice);
 
             var order = new OrderModel
             {
                 ItemId = orderModel.ItemId,
-                ItemPrice = itemPrice,
                 OrderDate = DateTime.Now,
                 OrderQuantity = orderModel.OrderQuantity,
                 Amount = amount,
@@ -88,12 +88,9 @@ namespace EPR_Project_ToyStore.Controllers
                 return NotFound("Item not found.");
             }
 
-            decimal itemPrice = (decimal)item.ItemPrice;
-            decimal amount = (decimal)(orderModel.OrderQuantity * itemPrice);
-
+            decimal amount = (decimal)(orderModel.OrderQuantity * item.ItemPrice);
 
             orderInfo.ItemId = orderModel.ItemId;
-                orderInfo.ItemPrice = itemPrice;
             orderInfo.OrderDate = DateTime.Now;
             orderInfo.OrderQuantity = orderModel.OrderQuantity;
             orderInfo.Amount = amount;
