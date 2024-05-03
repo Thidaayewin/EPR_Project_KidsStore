@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-[Table("OrderItem")]
+[Table("OrderItem_TBL")]
 public class OrderItemModel
 {
     [Key]

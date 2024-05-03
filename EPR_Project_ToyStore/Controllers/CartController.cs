@@ -10,6 +10,7 @@ namespace EPR_Project_ToyStore.Controllers
     public class CartController : ControllerBase
     {
 		private readonly AppDbContext _dbContext;
+
         public CartController() {
 
             _dbContext = new AppDbContext();
@@ -31,22 +32,8 @@ namespace EPR_Project_ToyStore.Controllers
 
         [HttpPost]
         public IActionResult CreateCart(CartModel cartModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var item = _dbContext.Cart.FirstOrDefault(x => x.ItemId == cartModel.ItemId);
-
-            var cart = new CartModel
-            {
-                OrderId = cartModel.OrderId,
-                ItemId = cartModel.ItemId,
-                Quantity = cartModel.Quantity,
-            };
-            
-            _dbContext.Cart.Add(cart);
+        {   
+            _dbContext.Cart.Add(cartModel);
             var result = _dbContext.SaveChanges();
             string message = result > 0 ? "Saving successful" : "Saving Failed";
             return Ok(message);
@@ -62,18 +49,6 @@ namespace EPR_Project_ToyStore.Controllers
                 return NotFound("No data found.");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var item = _dbContext.Items.FirstOrDefault(x => x.ItemId == cartModel.ItemId);
-            if (item is null)
-            {
-                return NotFound("Item not found.");
-            }
-
-            cart.Quantity = cartModel.Quantity;
             var result = _dbContext.SaveChanges();
             string message = result > 0 ? "Updating successful" : "Updating Failed";
             return Ok(message);

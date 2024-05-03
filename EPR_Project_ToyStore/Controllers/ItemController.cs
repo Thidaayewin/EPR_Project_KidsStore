@@ -40,7 +40,6 @@ namespace EPR_Project_ToyStore.Controllers
         [HttpPost]
         public IActionResult ItemCreate(ItemModel itemM)
         {
-            //itemM.ItemId = null;
             _dbContext.Items.Add(itemM);
             var result = _dbContext.SaveChanges();
 

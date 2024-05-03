@@ -12,7 +12,7 @@ namespace EPR_Project_ToyStore.Controllers
         private readonly AppDbContext _dbContext;
 
         public OrderController()
-		{
+        {
             _dbContext = new AppDbContext();
         }
 
@@ -26,8 +26,8 @@ namespace EPR_Project_ToyStore.Controllers
         [HttpGet("{id}")]
         public IActionResult OrderEdit(int id)
         {
-            var order = _dbContext.Orders.FirstOrDefault(x=> x.OrderId == id);
-            if(order is null)
+            var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
+            if (order is null)
             {
                 return NotFound("No data found.");
             }
@@ -37,30 +37,7 @@ namespace EPR_Project_ToyStore.Controllers
         [HttpPost]
         public IActionResult OrderCreate(OrderModel orderModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var item = _dbContext.Items.FirstOrDefault(x => x.ItemId == orderModel.ItemId);
-            if(item is null)
-            {
-                return NotFound("Item not found.");
-            }
-
-            decimal itemPrice = (decimal)item.ItemPrice;
-
-            decimal amount = (decimal)(orderModel.OrderQuantity * itemPrice);
-
-            var order = new OrderModel
-            {
-                ItemId = orderModel.ItemId,
-                OrderDate = DateTime.Now,
-                OrderQuantity = orderModel.OrderQuantity,
-                Amount = amount,
-            };
-
-            _dbContext.Orders.Add(order);
+            _dbContext.Orders.Add(orderModel);
             var result = _dbContext.SaveChanges();
 
             string message = result > 0 ? "Saving successful" : "Saving Failed";
@@ -77,26 +54,10 @@ namespace EPR_Project_ToyStore.Controllers
                 return NotFound("No data found.");
             }
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            var item = _dbContext.Items.FirstOrDefault(x => x.ItemId == orderModel.ItemId);
-            if (item is null)
-            {
-                return NotFound("Item not found.");
-            }
-
-            decimal amount = (decimal)(orderModel.OrderQuantity * item.ItemPrice);
-
-            orderInfo.ItemId = orderModel.ItemId;
+            orderInfo.CustomerId = orderModel.CustomerId;
             orderInfo.OrderDate = DateTime.Now;
-            orderInfo.OrderQuantity = orderModel.OrderQuantity;
-            orderInfo.Amount = amount;
-           
             var result = _dbContext.SaveChanges();
-
             string message = result > 0 ? "Updating successful" : "Updating Failed";
             return Ok(message);
         }
@@ -115,6 +76,6 @@ namespace EPR_Project_ToyStore.Controllers
             var message = result > 0 ? "Deleting successful" : "Deleting Failed";
             return Ok(message);
         }
-	}
+    }
 }
 
