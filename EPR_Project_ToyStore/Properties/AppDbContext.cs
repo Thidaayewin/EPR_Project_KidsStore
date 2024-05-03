@@ -30,16 +30,16 @@ namespace EPR_Project_ToyStore.Properties
         public DbSet<OrderModel> Orders { get; set; }
         public DbSet<CartModel> Cart { get; set; }
         public DbSet<CustomerModel> Customers { get; set; }
-        public DbSet<OrderItemModel> orderItems { get; set; }
-        public DbSet<CheckoutModel> checkout { get; set; }
-        public DbSet<CartItemModel> cartItem { get; set; }
+        public DbSet<OrderItemModel> OrderItems { get; set; }
+        public DbSet<CheckoutModel> Checkout { get; set; }
+        public DbSet<CartItemModel> CartItem { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<OrderModel>()
-                .HasOne(o => o.Item)
-                .WithMany() // Assuming one-to-many relationship
-                .HasForeignKey(o => o.ItemId);
-        }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<OrderModel>()
+        //        .HasOne(o => o.Item)
+        //        .WithMany() // Assuming one-to-many relationship
+        //        .HasForeignKey(o => o.ItemId);
+        //}
     }
 }
