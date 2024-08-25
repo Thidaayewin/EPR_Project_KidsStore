@@ -11,9 +11,9 @@ namespace EPR_Project_ToyStore.Properties
         private readonly SqlConnectionStringBuilder sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
         {
             DataSource = ".",
-            InitialCatalog = "ERP_DB",
-            UserID = "sa",
-            Password = "reallyStrongPwd123",
+            InitialCatalog = "ToyShopDB",
+            UserID = "taw",
+            Password = "NewStrongPassword123",
             TrustServerCertificate = true
         };
 
