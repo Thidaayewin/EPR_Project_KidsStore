@@ -1,4 +1,4 @@
-Family Toy Shop Digitalization Project
+Kids' World Digitalization Project
 
 I am trying to spend my free time with C# Dot Net Development skills by digitalising my parent's small business.
 
